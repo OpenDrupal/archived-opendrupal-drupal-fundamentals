@@ -1,0 +1,16 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - menu_ui
+third_party_settings:
+  menu_ui:
+    available_menus: {  }
+    parent: ''
+name: 'CTools block field test'
+type: ctools_block_field_test
+description: 'A content type used for the ctools_block field tests.'
+help: ''
+new_revision: false
+preview_mode: 0
+display_submitted: false

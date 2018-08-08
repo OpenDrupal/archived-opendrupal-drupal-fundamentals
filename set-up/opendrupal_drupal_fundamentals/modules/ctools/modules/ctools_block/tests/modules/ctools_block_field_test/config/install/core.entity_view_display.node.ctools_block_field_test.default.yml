@@ -1,0 +1,16 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.ctools_block_field_test.body
+    - node.type.ctools_block_field_test
+  module:
+    - user
+id: node.ctools_block_field_test.default
+targetEntityType: node
+bundle: ctools_block_field_test
+mode: default
+content: {  }
+hidden:
+  body: true
+  links: true
