@@ -13,7 +13,6 @@ After participating in this course you can build a basic Drupal site using Drupa
 Afterwards you can answer questions like:
 
 - How do I start with a Drupal website?
-- Wat zijn de mogelijkheden van Drupal en waar liggen de grenzen?
 - What is the views module, and what can it be used for?
 - What modern web technologies like responsive and decoupled are supported by Drupal?
 - How to stay current with Drupal developments?
