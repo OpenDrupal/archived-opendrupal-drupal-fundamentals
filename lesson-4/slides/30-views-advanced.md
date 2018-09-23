@@ -55,6 +55,7 @@ As a visitor, on the act page, I want to find the other acts on the same stage.
 
 # Relationships
 <!-- .slide: class="layout-title-page" -->
+
 Combine data from different sources
 
 --vv--
@@ -62,7 +63,7 @@ Combine data from different sources
 # Relationships
 - Views can combine data from different sources (SQL: join of tables). 
 - Example: Content + author; Content + file; Content + content. 
-- Note: Complex relations may lead to bad performing views. Check the SQL query and/or use caching.
+- **Note**: Complex relations may lead to bad performing views. Check the SQL query and/or use caching.
 
 --vv--
 

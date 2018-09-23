@@ -101,7 +101,6 @@ Place the news article on top of the list of articles in the front page.
 - Edit an old article.
 - Empty the 'Authored on' date field (Authoring information).
 - Save the article and check the front page.
-
 - Create a new article.
 - Check the 'Sticky at top of lists' (Promotion opties).
 - Save the article and check the front page.
