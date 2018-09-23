@@ -40,7 +40,7 @@ As developer I want to work with Drupal 8 because I have read good reviews about
 --vv--
 
 # Outline
-<!-- .slide: class="layout-two-col" -->
+<!-- .slide: class="layout-two-col" style="font-size: 65%" -->
 
 - [Lesson 1](lesson-1.html)
   - Drupal the CMS
