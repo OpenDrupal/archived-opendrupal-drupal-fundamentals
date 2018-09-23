@@ -1,5 +1,5 @@
 # OpenDrupal Drupal Fundamentals course
-This course is part of the [Open Drupal curriculum](https://opendrupal.github.io).
+This course is part of the [OpenDrupal curriculum](https://opendrupal.github.io).
 
 Laying the groundwork for your Drupal knowledge. This course covers the most important parts of Drupal core and gets
 you started with building a Drupal website.

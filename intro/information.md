@@ -1,5 +1,5 @@
-# Open Drupal: Drupal Fundamentals course
-The Open Drupal Drupal Fundamentals course is an introduction to Drupal as a Content Management Systeem. During this course you wil build a festival website. While building, you will get familiar with the most important principals and building blocks of Drupal 8 core.
+# OpenDrupal: Drupal Fundamentals course
+The OpenDrupal Drupal Fundamentals course is an introduction to Drupal as a Content Management Systeem. During this course you wil build a festival website. While building, you will get familiar with the most important principals and building blocks of Drupal 8 core.
 
 ## Target audience
 The course is primarily aimed at people who will work with Drupal as site builer, backend or front-end developer. But also project leads and webdesigners who are involved with Drupal, will benefit from the introduction this course provides.
