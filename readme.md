@@ -14,4 +14,8 @@ Contains instructions, code and data to set-up a course environment. Includes an
 
 ## Lessons
 Directory: /lesson-1, ..., /lesson-4
-Slides and exersises that make up this course.
+Slides and exersises that make up this course. Watch the slides by opening the lesson-*.html file in a browser.
+
+## Slides
+Directory: /slide-foundation
+This does not contain course specific materials. It provides the reveal.js framework for slides of this course.
