@@ -1,21 +1,33 @@
-# OpenDrupal Drupal Fundamentals course
-This course is part of the [OpenDrupal curriculum](https://opendrupal.github.io).
+# OpenDrupal Drupal Fundamentals course materials
 
-Laying the groundwork for your Drupal knowledge. This course covers the most important parts of Drupal core and gets
-you started with building a Drupal website.
+An introduction to Drupal as a Content Management System. Get familiar with Drupal's fundamental concepts.
 
-## Introduction
-Directory: /intro
-Contains information that can be used to promote a course, to inform (future) participants, to provide an outline and to set expectations.
+Viewed the slides on-line at https://opendrupal.github.io/opendrupal-drupal-fundamentals
+
+General info about this course: [opendrupal.org](https://opendrupal.org/materials/drupal-fundamentals).
+
+These materials are part of the [OpenDrupal curriculum](https://opendrupal.github.io).
 
 ## Set-up
+
 Directory: /set-up
-Contains instructions, code and data to set-up a course environment. Includes an installation profile for this course.
+
+This directory contains the Drupal installation profile for this course.
 
 ## Lessons
-Directory: /lesson-1, ..., /lesson-4
-Slides and exersises that make up this course. Watch the slides by opening the lesson-*.html file in a browser.
 
-## Slides
+Directory: /lesson-...
+
+The slides that make up this course.
+
+## Slide foundation
+
 Directory: /slide-foundation
-This does not contain course specific materials. It provides the reveal.js framework for slides of this course.
+
+No course specific materials here. This contains the the reveal.js framework and styling for the slides of this course.
+
+## License
+
+Open Drupal materials, such as slides and exercises, are licensed under the [Creative Commons Attribution-ShareAlike 4.0 license (CC BY-SA 4.0)](https://creativecommons.org/licenses/by-sa/4.0/). You are free to share and adapt these materials.
+
+Any included software packages, such as Drupal and Reveal.js, are licenced under their respective license. Example code developed for Drupal (e.g. modules, themes, profiles) inherit the Drupal license.
