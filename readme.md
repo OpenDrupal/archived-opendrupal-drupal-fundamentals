@@ -2,9 +2,9 @@
 
 An introduction to Drupal as a Content Management System. Get familiar with Drupal's fundamental concepts.
 
-Viewed the slides on-line at https://opendrupal.github.io/opendrupal-drupal-fundamentals
+View the slides on-line at https://opendrupal.github.io/opendrupal-drupal-fundamentals
 
-General info about this course: [opendrupal.org](https://opendrupal.org/materials/drupal-fundamentals).
+General info about this course: https://opendrupal.org/materials/drupal-fundamentals
 
 These materials are part of the [OpenDrupal curriculum](https://opendrupal.github.io).
 
