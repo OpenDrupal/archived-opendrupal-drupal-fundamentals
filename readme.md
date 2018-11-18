@@ -6,9 +6,9 @@ View the slides on-line at https://opendrupal.github.io/opendrupal-drupal-fundam
 
 General info about this course: https://opendrupal.org/materials/drupal-fundamentals
 
-These materials are part of the [OpenDrupal curriculum](https://opendrupal.github.io).
+These materials are part of the [OpenDrupal curriculum](https://opendrupal.org).
 
-## Set-up
+## Preparation
 
 Directory: /set-up
 
