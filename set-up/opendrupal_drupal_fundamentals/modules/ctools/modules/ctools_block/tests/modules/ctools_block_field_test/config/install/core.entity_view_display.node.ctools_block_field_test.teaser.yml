@@ -8,6 +8,8 @@ dependencies:
   module:
     - text
     - user
+_core:
+  default_config_hash: gQV5baI7pCIOBUtLkbJ1c2WJwM8CdlKiKOtLLIWnfy0
 id: node.ctools_block_field_test.teaser
 targetEntityType: node
 bundle: ctools_block_field_test

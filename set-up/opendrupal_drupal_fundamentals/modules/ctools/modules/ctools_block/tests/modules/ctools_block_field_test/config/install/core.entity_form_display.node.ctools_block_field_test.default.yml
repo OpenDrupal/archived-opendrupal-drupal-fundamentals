@@ -7,6 +7,8 @@ dependencies:
   module:
     - path
     - text
+_core:
+  default_config_hash: xpDeWNLzjX4dDB9YyBlO9y9FR4vHwMv0GKsuqDYy0Bc
 id: node.ctools_block_field_test.default
 targetEntityType: node
 bundle: ctools_block_field_test

@@ -6,6 +6,8 @@ dependencies:
     - node.type.ctools_block_field_test
   module:
     - text
+_core:
+  default_config_hash: fzUnwtwftRsgKExjpF6XdMqbUzP16ytkjQniBZl1Hqg
 id: node.ctools_block_field_test.body
 field_name: body
 entity_type: node
