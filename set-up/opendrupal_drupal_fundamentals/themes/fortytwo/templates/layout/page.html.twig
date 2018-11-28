@@ -56,7 +56,7 @@
   </div>
 {% endif %}
 
-<div class="wrapper">
+<div class="wrapper main-wrapper">
   {{ page.breadcrumb }}
 
   <section class="content column">
@@ -71,7 +71,7 @@
       <div class="highlighted">{{ page.highlighted }}</div>
     {% endif %}
 
-    <a id="main-content"></a>
+    <a id="main-content" tabindex="-1"></a>
 
     {{ page.content }}
   </section>
@@ -90,11 +90,8 @@
 
 </div>
 
-{% if page.footer or theme_credit %}
+{% if page.footer %}
   <footer>
     {{ page.footer }}
-    {% if theme_credit %}
-      <div class = "theme-credit">{{ theme_credit }}</div>
-    {% endif %}
   </footer>
 {% endif %}

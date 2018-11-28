@@ -1,31 +1,48 @@
-var gulp = require('gulp'),
-  $ = require('gulp-load-plugins')(),
+/**
+ * @file
+ * Gulpfile for fortytwo.
+ */
 
-// Non gulp specific plugins.
-  del = require('del');
-
-gulp.task('sass-compile', function () {
-  return gulp.src('static/sass/**/*.s+(a|c)ss') // Gets all files ending
-    .pipe($.sass())
-    .on('error', function (err) {
-      console.log(err);
-      this.emit('end');
-    })
-    .pipe($.autoprefixer({
-      browsers: ['ie 8-9', 'last 2 versions']
-    }))
-    .pipe(gulp.dest('static/css'));
-});
+var gulp = require('gulp');
+var $ = require('gulp-load-plugins')();
+var del = require('del');
+var autoprefixer = require('autoprefixer');
 
 /**
- * @task js
- * Do javascript stuff.
+ * @task sass-lint
+ * Lint sass, abort calling task on error
  */
-gulp.task('js', function () {
-  return gulp.src(['static/js/**/*.js', '!static/js/lib/*.js'])
-    .pipe($.jshint())
-    .pipe($.jshint.reporter('default'))
-    .pipe($.uglify());
+gulp.task('sass-lint', function () {
+  return gulp.src('static/sass/**/*.s+(a|c)ss')
+  .pipe($.sassLint({configFile: '.sass-lint.yml'}))
+  .pipe($.sassLint.format())
+  .pipe($.sassLint.failOnError());
+});
+
+gulp.task('sass-compile', ['sass-lint'], function () {
+  // postCss plugins and processes
+  var pcPlug = {
+    autoprefixer: require('autoprefixer'),
+    mqpacker: require('css-mqpacker'),
+    flexbugs: require('postcss-flexbugs-fixes')
+  };
+  var pcProcess = [
+    pcPlug.autoprefixer(),
+    pcPlug.mqpacker(),
+    pcPlug.flexbugs()
+  ];
+
+  return gulp.src('static/sass/**/*.s+(a|c)ss') // Gets all files ending
+  .pipe($.sass())
+  .on('error', function (err) {
+    console.log(err);
+    this.emit('end');
+  })
+  .pipe($.sourcemaps.init())
+  .pipe($.postcss(pcProcess))
+  .pipe($.sourcemaps.write())
+  .pipe(gulp.dest('static/css'))
+  .on('error', $.util.log);
 });
 
 /**
@@ -40,9 +57,8 @@ gulp.task('clean', function () {
  * @task watch
  * Watch files and do stuff.
  */
-gulp.task('watch', ['clean', 'sass-compile', 'js'], function () {
+gulp.task('watch', ['clean', 'sass-compile'], function () {
   gulp.watch('static/sass/**/*.+(scss|sass)', ['sass-compile']);
-  gulp.watch('static/js/**/*.js', ['js']);
 });
 
 /**
@@ -50,3 +66,4 @@ gulp.task('watch', ['clean', 'sass-compile', 'js'], function () {
  * Watch files and do stuff.
  */
 gulp.task('default', ['watch']);
+

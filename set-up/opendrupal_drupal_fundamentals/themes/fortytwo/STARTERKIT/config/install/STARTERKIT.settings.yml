@@ -1,5 +1,5 @@
 ft_layout_style : 'columns-middle'
-ft_layout_responsive : 'adaptive'
+ft_layout_responsive : 'layout-fluid'
 ft_apple_touch : 1
 ft_cleartype : 1
 ft_viewport : 1
@@ -17,3 +17,4 @@ ft_breadcrumb_home : 1
 ft_breadcrumb_trailing : 0
 ft_breadcrumb_title : 0
 ft_show_grid : 0
+ft_layout_tabs : 1

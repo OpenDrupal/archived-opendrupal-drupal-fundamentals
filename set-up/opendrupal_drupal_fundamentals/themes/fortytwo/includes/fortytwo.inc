@@ -14,7 +14,6 @@ $_fortytwo_path_to_core = drupal_get_path('theme', 'fortytwo');
 function fortytwo_get_theme(&$variables) {
   fortytwo_load_debuggers($variables);
   fortytwo_add_libraries($variables);
-//  fortytwo_add_head_items();
 }
 
 /**
@@ -48,43 +47,16 @@ function fortytwo_add_libraries(&$variables) {
     $variables['page']['#attached']['library'][] = 'fortytwo/placeholder';
   }
 
+  $tabs = theme_get_setting('ft_layout_tabs');
+  if (!empty($tabs)) {
+    $variables['page']['#attached']['library'][] = 'fortytwo/tabs';
+  }
+
   $prettify = theme_get_setting('ft_prettify_js');
   if (!empty($prettify)) {
     $variables['page']['#attached']['drupalSettings']['fortytwo']['prettify_hide_upload'] = theme_get_setting('ft_prettify_js_hide_upload');
     $variables['page']['#attached']['drupalSettings']['fortytwo']['prettify_add_remove'] = theme_get_setting('ft_prettify_js_add_remove');
     $variables['page']['#attached']['library'][] = 'fortytwo/prettify';
-  }
-}
-
-/**
- * Add meta tags to the html header.
- */
-function fortytwo_add_head_items() {
-  $viewport = theme_get_setting('ft_viewport');
-  if (!empty($viewport)) {
-    $user_scalable = theme_get_setting('ft_viewport_user_scaleable');
-    $initial_scale = theme_get_setting('ft_viewport_initial_scale');
-    $minimum_scale = theme_get_setting('ft_viewport_minimum_scale');
-    $maximum_scale = theme_get_setting('ft_viewport_maximum_scale');
-    $content = "width=device-width, initial-scale=" . $initial_scale . ", minimum-scale=" . $minimum_scale . ", maximum-scale=" . $maximum_scale . ", user-scalable=" . $user_scalable;
-    $element = array(
-      '#tag' => 'meta',
-      '#attributes' => array(
-        'name' => 'viewport',
-        'content' => $content,
-      ),
-    );
-    drupal_add_html_head($element, 'ft-viewport');
-  }
-
-  $cleartype = theme_get_setting('ft_cleartype');
-  if (!empty($cleartype)) {
-    $meta = array(
-      '#tag' => 'meta',
-      '#attributes' => array('http-equiv' => 'cleartype', 'content' => 'on'),
-    );
-
-    drupal_add_html_head($meta, 'ft-cleartype');
   }
 }
 

@@ -1,5 +1,4 @@
 {
-  "enable_bs": false,
-  "localhost": "localhost",
-  "debug": true
+  "enable_livereload": true,
+  "livereload_hard_refresh": false
 }

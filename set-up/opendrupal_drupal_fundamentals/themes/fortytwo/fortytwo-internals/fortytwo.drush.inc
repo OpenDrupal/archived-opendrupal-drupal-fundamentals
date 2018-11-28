@@ -63,11 +63,17 @@ function drush_fortytwo($name = NULL, $machine_name = NULL) {
   );
   $machine_name = preg_replace($search, '', $machine_name);
 
+  // We want to have the theme installed in the themes/contrib folder.
+  if (drupal_get_path('theme', 'fortytwo') != 'themes/contrib/fortytwo') {
+    drush_die(dt('The fortytwo theme needs to be installed in the "themes/contrib/fortytwo" directory. Now it is installed in the "!directory". Please fix this issue, or create a manual copy and fix the scss imports.', array('!directory' => drupal_get_path('theme', 'fortytwo'))));
+  }
+
   // Determine the path to the new subtheme by finding the path to Fortytwo.
   $fortytwo_path = drush_locate_root() . '/' . drupal_get_path('theme', 'fortytwo');
-  $subtheme_path = explode('/', $fortytwo_path);
-  array_pop($subtheme_path);
-  $subtheme_path = implode('/', $subtheme_path) . '/' . str_replace('_', '-', $machine_name);
+  drush_print(drupal_get_path('theme', 'fortytwo'));
+
+  // Determine the path to the new subtheme by finding the path to Fortytwo.
+  $subtheme_path = drush_locate_root() . '/themes/custom/' . str_replace('_', '-', $machine_name);
 
   // Make a fresh copy of the original starter kit.
   drush_op('fortytwo_copy', $fortytwo_path . '/STARTERKIT', $subtheme_path);
@@ -79,6 +85,9 @@ function drush_fortytwo($name = NULL, $machine_name = NULL) {
   // Rename the libraries.yml file.
   $subtheme_yml_lib_file = $subtheme_path . '/' . $machine_name . '.libraries.yml';
   drush_op('rename', $subtheme_path . '/STARTERKIT.libraries.yml', $subtheme_yml_lib_file);
+
+  // Replace all occurrences of 'STARTERKIT' with the machine name of sub theme.
+  drush_op('fortytwo_file_str_replace', $subtheme_yml_lib_file, 'STARTERKIT', $machine_name);
 
   // Alter the contents of the .info.yml file based on the command options.
   $alterations = array(
@@ -102,12 +111,23 @@ function drush_fortytwo($name = NULL, $machine_name = NULL) {
   // Replace all occurrences of 'STARTERKIT' with the machine name of sub theme.
   drush_op('fortytwo_file_str_replace', $subtheme_theme_file, 'STARTERKIT', $machine_name);
 
+  // Rename the STARTERKIT.js file.
+  $subtheme_js_file = $subtheme_path . '/static/js/' . $machine_name . '.js';
+  drush_op('rename', $subtheme_path . '/static/js/STARTERKIT.js', $subtheme_js_file);
+
+  // Replace all occurrences of 'STARTERKIT' with the machine name of sub theme.
+  drush_op('fortytwo_file_str_replace', $subtheme_js_file, 'STARTERKIT', $machine_name);
+
+  // Rename the STARTERKIT.scss file.
+  $subtheme_js_file = $subtheme_path . '/static/sass/' . $machine_name . '.scss';
+  drush_op('rename', $subtheme_path . '/static/sass/STARTERKIT.scss', $subtheme_js_file);
+
+  // Rename the STARTERKIT.css file.
+  $subtheme_js_file = $subtheme_path . '/static/css/' . $machine_name . '.css';
+  drush_op('rename', $subtheme_path . '/static/css/STARTERKIT.css', $subtheme_js_file);
+
   // Replace all occurrences of 'STARTERKIT' with the machine name of sub theme.
   drush_op('fortytwo_file_str_replace', $subtheme_path . '/package.json', 'STARTERKIT', $machine_name);
-  drush_op('fortytwo_file_str_replace', $subtheme_path . '/static/sass/styleguide.md', 'STARTERKIT', $machine_name);
-  drush_op('fortytwo_file_str_replace', $subtheme_path . '/static/sass/styleguide.md', 'STARTERKIT', $machine_name);
-  drush_op('fortytwo_file_str_replace', $subtheme_path . '/static/kss-node-template/template/index.html', 'STARTERKIT', $machine_name);
-
 
   // Notify user of the newly created theme.
   drush_print(dt('Starter kit for "!name" created in: !path', array(
@@ -123,19 +143,14 @@ function fortytwo_copy($source_dir, $target_dir, $ignore = '/^(\.(\.)?|CVS|\.svn
   if (!is_dir($source_dir)) {
     drush_die(dt('The directory "!directory" was not found.', array('!directory' => $source_dir)));
   }
-  $dir = opendir($source_dir);
-  mkdir($target_dir);
-  while ($file = readdir($dir)) {
-    if (!preg_match($ignore, $file)) {
-      if (is_dir($source_dir . '/' . $file)) {
-        fortytwo_copy($source_dir . '/' . $file, $target_dir . '/' . $file, $ignore);
-      }
-      else {
-        copy($source_dir . '/' . $file, $target_dir . '/' . $file);
-      }
-    }
+
+  $folder = drush_mkdir($target_dir);
+  if ($folder) {
+    drush_copy_dir($source_dir, $target_dir, FILE_EXISTS_OVERWRITE);
   }
-  closedir($dir);
+  else {
+    drush_die(dt('The directory "!directory" could not be created.', array('!directory' => $target_dir)));
+  }
 }
 
 /**

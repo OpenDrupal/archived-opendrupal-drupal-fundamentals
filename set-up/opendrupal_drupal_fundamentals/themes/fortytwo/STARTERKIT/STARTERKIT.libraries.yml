@@ -2,6 +2,6 @@ main:
   version: VERSION
   css:
     base:
-      static/css/main.css: {}
+      static/css/STARTERKIT.css: {}
   js:
-      static/js/main.js: {}
+      static/js/STARTERKIT.js: {}

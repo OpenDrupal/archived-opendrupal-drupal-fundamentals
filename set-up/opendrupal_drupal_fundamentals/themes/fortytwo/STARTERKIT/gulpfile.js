@@ -1,42 +1,68 @@
-var gulp              = require('gulp'),
-  $                   = require('gulp-load-plugins')(),
+/**
+ * @file
+ * Gulpfile for fortytwo.
+ */
 
-// Non gulp specific plugins.
-  browserSync         = require('browser-sync').create(),
-  del                 = require('del'),
-  runSequence         = require('run-sequence');
+var gulp = require('gulp');
+var $ = require('gulp-load-plugins')();
+var del = require('del');
+var autoprefixer = require('autoprefixer');
 
 /**
- * @task sass
- * Do sass and reload tasks in sequence.
+ * @task sass-lint
+ * Lint sass, abort calling task on error
  */
-gulp.task('sass', function () {
-  runSequence('sass-compile',
-    'reload');
+gulp.task('sass-lint', function () {
+  return gulp.src('static/sass/**/*.s+(a|c)ss')
+  .pipe($.sassLint({configFile: '.sass-lint.yml'}))
+  .pipe($.sassLint.format())
+  .pipe($.sassLint.failOnError());
 });
 
-gulp.task('sass-compile', function () {
-  return gulp.src('static/sass/**/*.s+(a|c)ss') // Gets all files ending
-    .pipe($.sass())
-    .on('error', function (err) {
-      console.log(err);
-      this.emit('end');
-    })
-    .pipe($.autoprefixer({
-      browsers: ['ie 8-9', 'last 2 versions']
-    }))
-    .pipe(gulp.dest('static/css'));
+gulp.task('sass-compile', ['sass-lint'], function () {
+  // postCss plugins and processes
+  var pcPlug = {
+    autoprefixer: require('autoprefixer'),
+    mqpacker: require('css-mqpacker'),
+    flexbugs: require('postcss-flexbugs-fixes')
+  };
+  var pcProcess = [
+    pcPlug.autoprefixer(),
+    pcPlug.mqpacker(),
+    pcPlug.flexbugs()
+  ];
+
+  var stream = gulp.src('static/sass/**/*.s+(a|c)ss') // Gets all files ending
+  .pipe($.sourcemaps.init())
+  .pipe($.sass())
+  .pipe($.postcss(pcProcess))
+  .pipe($.sourcemaps.write('maps'))
+  .pipe(gulp.dest('static/css'))
+  .on('error', $.util.log);
+
+  if (config.enable_livereload && config.livereload_hard_refresh) {
+    stream.pipe($.livereload());
+  }
+  
+  return stream;
 });
 
 /**
  * @task js
- * Do javascript stuff.
+ *
  */
 gulp.task('js', function () {
-  return gulp.src(['static/js/**/*.js', '!static/js/lib/*.js'])
-    .pipe($.jshint())
-    .pipe($.jshint.reporter('default'))
-    .pipe($.uglify());
+  var stream = gulp.src(['static/js/**/*.js'])
+  .pipe($.jscs())
+  .pipe($.jscs.reporter())
+  .pipe(gulp.dest('./static/js'))
+  .on('error', $.util.log);
+  
+  if (config.enable_livereload && config.livereload_hard_refresh) {
+    stream.pipe($.livereload());
+  }
+
+  return stream;
 });
 
 /**
@@ -45,52 +71,6 @@ gulp.task('js', function () {
  */
 gulp.task('clean', function () {
   return del(['static/css/*']);
-});
-
-/**
- * @task reload
- * Refresh the page after clearing cache.
- */
-gulp.task('reload', function () {
-  if (config.enable_bs) {
-    browserSync.reload();
-  }
-});
-
-/**
- * @task watch
- * Watch files and do stuff.
- */
-gulp.task('watch', ['clean', 'sass', 'js'], function () {
-  gulp.watch('static/sass/**/*.+(scss|sass)', ['sass']);
-  gulp.watch('static/js/**/*.js', ['js']);
-
-  // Watch php, inc and info file changes to run drush task and reload page.
-  gulp.watch('**/*.{php,inc,info}', ['clearcache'], ['reload']);
-});
-
-/**
- * @task clearcache
- * Run drush to clear the theme registry.
- */
-gulp.task('clearcache', $.shell.task([
-  'drush cr'
-]));
-
-/**
- * @task browser-sync
- * Launch the server.
- */
-gulp.task('browser-sync', ['sass', 'js'], function () {
-  if (config.enable_bs) {
-    browserSync.init({
-      proxy: config.localhost,
-      open: false,
-      socket: {
-        domain: 'localhost:3000'
-      }
-    });
-  }
 });
 
 /**
@@ -108,7 +88,30 @@ gulp.task('load-config', function() {
 });
 
 /**
+ * @task watch
+ * Watch files and do stuff.
+ */
+gulp.task('watch', ['clean', 'sass-compile', 'js'], function () {
+  gulp.watch('static/sass/**/*.+(scss|sass)', ['sass-compile']);
+  gulp.watch('static/js/**/*.js', ['js']);
+
+  if (config.enable_livereload) {
+    console.log('Using live reload. Please enable your livereload browser plugin.');
+    $.livereload.listen();
+
+    gulp.watch('static/css/**/*.css', function(file) {
+      $.livereload.changed(file.path);
+    });
+
+    gulp.watch('static/js/**/*.js', function(file){
+      $.livereload.changed(file.path);
+    });
+  }
+});
+
+/**
  * @task default
  * Watch files and do stuff.
  */
-gulp.task('default', ['load-config', 'browser-sync', 'watch']);
+gulp.task('default', ['load-config', 'watch']);
+

@@ -7,6 +7,12 @@ sub-theme which is located out side of the root fortytwo/ folder.
 We tried to make the base theme as clean and simple as possible. It has some
 styling for basic input fields and buttons.
 
+## FortyTwo base theme location
+
+FortyTwo follows the specifications of theme locations as described on the page
+https://www.drupal.org/docs/8/theming-drupal-8/drupal-8-theme-folder-structure.
+
+So it is important to install the FortyTwo base theme in the folder `/themes/contrib/fortytwo`
 
 ## Setup the location for your new sub-theme.  
 
@@ -14,7 +20,7 @@ styling for basic input fields and buttons.
   **IMPORTANT:** The name of your sub-theme must start with an *alphabetic character* and can only
   contain *lowercase letters, numbers and underscores*.
 
-  For example, copy the `/themes/fortytwo/STARTERKIT` folder and rename it as `/themes/foo`.
+  For example, copy the `/themes/contrib/fortytwo/STARTERKIT` folder and rename it as `/themes/custom/foo`.
 
   Why? Each theme should reside in its own folder. To make it easier to upgrade FortyTwo, sub-themes should
   reside in a folder separate from the base theme.
@@ -23,25 +29,27 @@ styling for basic input fields and buttons.
 
   You can use drush to setup your new base theme. Follow the steps below and
   consult `drush help fortytwo` for help.
-  
+
   1. **Ensure drush knows about the fortytwo command**
-  
+
     After you have downloaded FortyTwo and placed it in your `themes`
     directory, you need to enable the FortyTwo theme and set FortyTwo as the
     default theme on the Appearance administrative page.
-    
+
     Type: `drush en fortytwo` and go to Administrative Menu > Appearance and
-    next to Fortytwo, click on *Set as default*. The drush fortytwo commandwill now
-    be available to run.
-  
+    next to Fortytwo, click on *Set as default*. You can also use drush for this
+    by using `drush config-set system.theme default fortytwo`.
+
+    The `drush fortytwo` command will now be available to run.
+
   2. **Run the drush fortytwo command with the following parameters.**
-     
+
      In the command line, use the `drush fortytwo "My theme name" my_theme`
      command to generate a subtheme with machine name foo and human name
      "Foo theme" in your Drupal site.
-     
+
      Tip: Type `drush help fortytwo` to view options and example commands.
-  
+
 
 ## Setup the basic information for your sub-theme.
 
@@ -52,10 +60,19 @@ styling for basic input fields and buttons.
   For example, rename the `foo/STARTERKIT.info.yml` file to `foo/foo.info.yml`. Edit the
   foo.info.yml file and change `"name = Forty Two Sub-theme Starter Kit"`. Do the same
   with the description property.
+  Make sure you also rename the libraries section `STARTERKIT/main` to `foo/main` in
+  the .info.yml file.
 
   Also rename the STARTERKIT.libraries.yml and the STARTERKIT.theme files. For example rename
   the `foo/STARTERKIT.libraries.yml` file to `foo/foo.libraries.yml` and the `foo/STARTERKIT.theme`
   file to `foo/foo.theme`. Replace any occurences of STARTERKIT in any of these files.
+
+  The main javascript file needs to be renamed in order to work. A reference to
+  that file can be found in the subtheme's `.info.yml` file, and the file itself is
+  located in the folder `static/js`. Rename the file to whatever you want and
+  change the reference to that file in the `.info.yml` file. Best practice is to
+  name it like the theme's machine name. Also rename the behavior in the
+  `STARTERKIT.js` file to reflect your theme's name.
 
   Do not forget to rename the file in the config folder as well.
 
@@ -63,8 +80,6 @@ styling for basic input fields and buttons.
 
   A lot of settings can be done on the sub-theme appearance page. CSS/SASS specific
   settings can be set in `/static/sass/_settings.sass`.
-  It's possible to compile the SASS files with Compass, there's a `config.rb`
-  file included. We have not made use of Compass, but if you want to use it, you can.
 
 ## Responsive
 
@@ -112,6 +127,5 @@ styling for basic input fields and buttons.
   * Sass compiling, including source maps and autoprefixer;
   * JS Hint, and uglify;
   * Cache clear when you change php, inc or info files in the theme;
-  * BrowserSync is also added, but initially disabled. You can enable it by
-    changing the `enable_bs` value in the `gulp.config.json` file to true and setting the
-    correct `bs_proxy_host` value. This has to be the url to your local dev environment.
+  * Livereload is added to the gulp file. To make this work you need the browser plugin 
+    which you can find on http://livereload.com/extensions/. Also you need to enable it by changing the `enable_livereload` value in the `gulp.config.json` file to true. With the option `livereload_hard_refresh` you can enable or disable window refreshes. When this option is set to false (default) only the static files will be reloaded.

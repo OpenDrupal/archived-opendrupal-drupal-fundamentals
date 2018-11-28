@@ -1,74 +1,77 @@
-(function ( $ ) {
+(function ($) {
 
-	function Placeholder( element ) {
+  function Placeholder(element) {
 
-		var view = {
+    var view = {
 
-			init: function( item ) {
-				item = $( item );
+      init: function (item) {
+        item = $(item);
 
-				// attach event handlers
-				item.bind( 'focus', view.hide );
-				item.bind( 'blur', view.show );
+        // attach event handlers
+        item.bind('focus', view.hide);
+        item.bind('blur', view.show);
 
-				view.render( item );
-			},
+        view.render(item);
+      },
 
-			render: function( item ) {
-				if( item.attr( 'type' ) == 'password' ) view.clone( item );
-				view.show( item );
-			},
+      render: function (item) {
+        if (item.attr('type') == 'password') {
+          view.clone(item);
+        }
 
-			show: function( e ) {
-				var $el = (typeof e.currentTarget != 'undefined') ? $(e.currentTarget) : $(e);
+        view.show(item);
+      },
 
-				if( _.isUndefined( $el.attr('value') ) || $el.attr( 'value' ) === $el.attr( 'placeholder' ) ) {
-					if($el.attr('type') == 'password') {
-						$el.hide();
-						$el.next().show();
-					} else {
-						$el.val($el.attr('placeholder'));
-						$el.addClass('placeholder');
-					}
-				}
-			},
+      show: function (e) {
+        var $el = (typeof e.currentTarget != 'undefined') ? $(e.currentTarget) : $(e);
 
-			hide: function( e ) {
-				var $el = $(e.currentTarget);
+        if (_.isUndefined($el.attr('value')) || $el.attr('value') === $el.attr('placeholder')) {
+          if ($el.attr('type') == 'password') {
+            $el.hide();
+            $el.next().show();
+          } else {
+            $el.val($el.attr('placeholder'));
+            $el.addClass('placeholder');
+          }
+        }
+      },
 
-				if($el.val() == $el.attr('placeholder') && $el.hasClass('placeholder')) {
-					$el.val('');
-					$el.removeClass('placeholder');
-				}
-			},
+      hide: function (e) {
+        var $el = $(e.currentTarget);
 
-			clone: function( item ) {
-				var copy = $( document.createElement( 'input' ));
+        if ($el.val() == $el.attr('placeholder') && $el.hasClass('placeholder')) {
+          $el.val('');
+          $el.removeClass('placeholder');
+        }
+      },
 
-				copy.addClass('placeholder');
-				copy.val( item.attr( 'placeholder' ));
-				copy.attr({
-					type: 'text',
-					name: 'ph-clone-' + item.attr( 'name' )
-				});
+      clone: function (item) {
+        var copy = $(document.createElement('input'));
 
-				copy.on( 'focus', function() {
-					$( this ).hide();
-					item.show();
-					setTimeout( function(){ item.focus(); }, 1);
-				});
+        copy.addClass('placeholder');
+        copy.val(item.attr('placeholder'));
+        copy.attr({
+          type: 'text',
+          name: 'ph-clone-' + item.attr('name'),
+        });
 
-				copy.insertAfter( item );
-			}
-		};
+        copy.on('focus', function () {
+          $(this).hide();
+          item.show();
+          setTimeout(function () { item.focus(); }, 1);
+        });
 
-		view.init( element );
+        copy.insertAfter(item);
+      },
+    };
 
-        return view;
-	}
+    view.init(element);
 
-	$( '[placeholder]' ).each( function() { new Placeholder({ el: this }); });
+    return view;
+  }
 
-	// window.Placeholder = Placeholder;
+  $('[placeholder]').each(function () { new Placeholder({ el: this }); });
 
-})( jQuery );
+  // window.Placeholder = Placeholder;
+
+})(jQuery);

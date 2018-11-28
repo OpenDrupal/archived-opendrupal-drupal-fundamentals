@@ -5,7 +5,6 @@
  */
 
 use Drupal\Core\Form\FormState;
-use Drupal\Core\Template\Attribute;
 use Drupal\Core\Url;
 
 /**
@@ -30,35 +29,11 @@ function fortytwo_form_system_theme_settings_alter(array &$form, FormState $form
  * Setup the theme settings form.
  */
 function fortytwo_theme_settings_general(&$form, &$form_state) {
-  _fortytwo_theme_basic($form);
   _fortytwo_theme_get_layout($form);
   _fortytwo_theme_get_javascript($form);
   _fortytwo_theme_get_metatags($form);
   _fortytwo_theme_get_debuggers($form);
   _fortytwo_theme_get_breadcrumb($form);
-}
-
-/**
- * Basic form fields.
- */
-function _fortytwo_theme_basic(&$form) {
-  $form['ft_basic'] = array(
-    '#type' => 'details',
-    '#title' => t('Basic settings'),
-    '#group' => 'fortytwo_settings',
-  );
-
-  $form['theme_settings']['#prefix'] = _fortytwo_theme_create_prefix(t('Toggle display'));
-  $form['logo']['#prefix'] = _fortytwo_theme_create_prefix(t('Logo image settings'));
-  $form['favicon']['#prefix'] = _fortytwo_theme_create_prefix(t('Shortcut icon settings'));
-
-  $form['ft_basic']['theme_settings'] = $form['theme_settings'];
-  $form['ft_basic']['logo'] = $form['logo'];
-  $form['ft_basic']['favicon'] = $form['favicon'];
-
-  unset($form['theme_settings']);
-  unset($form['logo']);
-  unset($form['favicon']);
 }
 
 /**
@@ -98,6 +73,13 @@ function _fortytwo_theme_get_layout(&$form) {
     '#title'         => t('Enable responsive styling'),
     '#default_value' => theme_get_setting('ft_layout_responsive'),
     '#options'       => $options,
+  );
+
+  $form['ft_layout']['ft_layout_tabs'] = array(
+    '#type'          => 'checkbox',
+    '#title'         => t('Use collapsible tabs'),
+    '#description'   => t('The tabs will be collapsed on the right side of the page.'),
+    '#default_value' => theme_get_setting('ft_layout_tabs'),
   );
 }
 

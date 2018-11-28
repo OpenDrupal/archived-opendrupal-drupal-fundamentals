@@ -46,3 +46,8 @@ grid:
   version: 1.x
   js:
     static/js/plugins/gridbackgroundview.js: {}
+
+tabs:
+  version: 1.x
+  js:
+    static/js/plugins/collapsibleTabs.js: {}
