@@ -55,8 +55,8 @@
 # Figures
 - Since 2001
 - 10.000+ Developers
-- 4900+ Drupal 8 modules (march '18)
-- 280+ Drupal 8 themes (march '18)
+- 4900+ Drupal modules (march '18)
+- 280+ Drupal themes (march '18)
 - 115+ Languages
 
 --vv--

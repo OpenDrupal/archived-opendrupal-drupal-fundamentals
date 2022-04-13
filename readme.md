@@ -1,6 +1,6 @@
 # OpenDrupal Drupal Fundamentals course materials
 
-An introduction to Drupal as a Content Management System. Get familiar with Drupal's fundamental concepts.
+An introduction to Drupal as a Content Management System. Get familiar with Drupal's fundamental concepts. Suitable for drupal 9.
 
 View the slides on-line at https://opendrupal.github.io/opendrupal-drupal-fundamentals
 

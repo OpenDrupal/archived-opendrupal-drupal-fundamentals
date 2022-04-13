@@ -5,7 +5,7 @@
 # Modules
 - “There is a module for it”
 - More than 10.000 modules
-- (march ’18: 4800 pcs, Drupal 8) 
+- (march ’18: 4800 pcs, Drupal) 
 - Almost all contributed modules at Drupal.org:
 <br>http://drupal.org/download
 - Try-out unknown modules first.

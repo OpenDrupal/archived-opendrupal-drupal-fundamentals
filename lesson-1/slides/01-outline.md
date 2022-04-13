@@ -7,7 +7,7 @@ For the eighth time we organise this year The Festival. During this one day even
 
 The organisation of The Festival want a website that is easy to maintain. So we can concentrate on organising The Festival.
 
-As developer I want to work with Drupal 8 because I have read good reviews about it.
+As developer I want to work with Drupal because I have read good reviews about it.
 
 --vv--
 
