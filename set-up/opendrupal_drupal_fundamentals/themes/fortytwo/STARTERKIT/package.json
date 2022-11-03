@@ -12,7 +12,7 @@
     "autoprefixer": "^6.7.7",
     "css-mqpacker": "^4.0.0",
     "del": "^2.2.2",
-    "gulp": "^3.9.1",
+    "gulp": "^4.0.2",
     "gulp-concat": "^2.6.1",
     "gulp-debug": "^3.1.0",
     "gulp-jscs": "^4.0.0",
