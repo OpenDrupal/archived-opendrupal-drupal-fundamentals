@@ -17,7 +17,7 @@
     "gulp-debug": "^3.1.0",
     "gulp-jscs": "^4.0.0",
     "gulp-lintspaces": "^0.5.0",
-    "gulp-livereload": "^3.8.1",
+    "gulp-livereload": "^4.0.2",
     "gulp-load-plugins": "^1.5.0",
     "gulp-postcss": "^9.0.1",
     "gulp-sass": "^3.1.0",
